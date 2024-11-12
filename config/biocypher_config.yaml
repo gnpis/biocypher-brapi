@@ -1,4 +1,5 @@
 # add your settings here (overriding the defaults)
+# https://biocypher.org/installation.html#biocypher-settings
 
 biocypher:
   offline: true
