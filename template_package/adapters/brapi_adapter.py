@@ -91,52 +91,59 @@ class BrapiAdapter:
                 properties={
                     "trialDbId": trial["trialDbId"],
                     "trialName": trial["trialName"],
-                    "documentationURL": trial["documentationURL"],
-                    "startDate": trial["startDate"],
-                    "endDate": trial["endDate"]
+                    "documentationURL": trial["documentationURL"]
                 }
             )
 
         for study in self.study:
+            properties={
+                "studyDbId": study["studyDbId"],
+                "studyName": study["studyName"],
+                "trialName": study["trialName"],
+                "germplasmDbIds": study["germplasmDbIds"],
+                "startDate": study["startDate"],
+                "endDate": study["endDate"],
+                "documentationURL": study["documentationURL"],
+                "studyType": study["studyType"],
+                "locationName": study["locationName"],
+                "locationDbId": study["locationDbId"],
+                "observationVariableDbIds": study["observationVariableDbIds"],
+                "seasons": study["seasons"]
+            }
+            #yield (study["studyDbId"], "study", properties)
             yield BioCypherNode (
-                node_id=study["studyDbId"],
-                node_label="study",
-                properties={
-                    "studyDbId": study["studyDbId"],
-                    "studyName": study["studyName"],
-                    "trialName": study["trialName"],
-                    "germplasmDbIds": study["germplasmDbIds"],
-                    "startDate": study["startDate"],
-                    "endDate": study["endDate"]
-                }
+               node_id=study["studyDbId"],
+               node_label="study",
+               properties=properties,
             )
 
-    #     for germplasm in self.germplasm:
-    #         yield BioCypherNode (
-    #             node_id=germplasm["germplasmDbId"],
-    #             node_label="germplasm",
-    #             properties={
-    #                 "germplasmDbId": germplasm["germplasmDbId"],
-    #                 "germplasmName": germplasm["germplasmName"],
-    #                 "germplasmPUI": germplasm["germplasmPUI"],
-    #                 "defaultDisplayName": germplasm["defaultDisplayName"],
-    #                 "synonyms": germplasm["synonyms"],
-    #                 "species": germplasm["species"],
-    #                 "subtaxa": germplasm["subtaxa"],
-    #                 "instituteCode": germplasm["instituteCode"],
-    #                 "instituteName": germplasm["instituteName"],
-    #                 "biologicalStatusOfAccessionCode": germplasm["biologicalStatusOfAccessionCode"],
-    #                 "countryOfOriginCode": germplasm["countryOfOriginCode"],
-    #                 "typeOfGermplasmStorageCode": germplasm["typeOfGermplasmStorageCode"],
-    #                 "amount": germplasm["amount"],
-    #                 "availability": germplasm["availability"],
-    #                 "entryNumber": germplasm["entryNumber"],
-    #                 "acquisitionDate": germplasm["acquisitionDate"],
-    #                 "donors": germplasm["donors"],
-    #                 "genus": germplasm["genus"]
-    #             }
-    #         )
-    #
+        for germplasm in self.germplasm:
+            properties={
+                "germplasmDbId": germplasm["germplasmDbId"],
+                "germplasmName": germplasm["germplasmName"],
+                "germplasmPUI": germplasm["germplasmPUI"],
+                "accessionNumber": germplasm["accessionNumber"],
+                "instituteCode": germplasm["instituteCode"],
+                "instituteName": germplasm["instituteName"],
+                "biologicalStatusOfAccessionCode": germplasm["biologicalStatusOfAccessionCode"],
+                "biologicalStatusOfAccessionDescription": germplasm["biologicalStatusOfAccessionDescription"],
+                "countryOfOriginCode": germplasm["countryOfOriginCode"],
+                "pedigree": germplasm["pedigree"],
+                "genusSpecies": germplasm["genusSpecies"],
+                #"synonyms": germplasm["synonyms"],
+                "genus": germplasm["genus"],
+                "species": germplasm["species"],
+                "subtaxa": germplasm["subtaxa"],
+                "presenceStatus": germplasm["presenceStatus"],
+                "commonCropName": germplasm["commonCropName"],
+                "taxonCommonNames": germplasm["taxonCommonNames"]
+            }
+            yield BioCypherNode (
+                node_id=germplasm["germplasmDbId"],
+                node_label="germplasm",
+                properties=properties,
+            )
+
     def get_edges(self):
         logger.info("Generating edges.")
         for trial in self.trial:
