@@ -146,12 +146,22 @@ class BrapiAdapter:
 
     def get_edges(self):
         logger.info("Generating edges.")
+
         for trial in self.trial:
             for study in trial["studies"]:
                 yield BioCypherEdge (
                     source_id=trial["trialDbId"],
                     target_id=study["studyDbId"],
                     relationship_label="trial_studies",
+                    properties={}
+                )
+
+        for study in self.study:
+            for germplasm in study["germplasmDbIds"]:
+                yield BioCypherEdge (
+                    source_id=study["studyDbId"],
+                    target_id=germplasm,
+                    relationship_label="studies_germplasm",
                     properties={}
                 )
 
