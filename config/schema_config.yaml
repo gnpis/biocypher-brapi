@@ -5,28 +5,64 @@ trial:
     represented_as: node
     preferred_id: trialDbId
     input_label: trialName
+    properties:
+        trialName: string
+        trialDbId: string
+        documentationURL: string
+
 
 
 study:
-    is_a: dataset
+    #is_a: dataset
     represented_as: node
     preferred_id: studyDbId
     input_label: studyName
     properties:
         germplasmDbIds: string[]
+        documentationURL: string
+        locationDbId: string
+        locationName: string
+        observationVariableDbIds: string[]
+        studyName: string
+        studyDbId: string
+        studyType: string
+        seasons: string[]
+        trialName: string
+        startDate: string
+        endDate: string
 
 germplasm:
     is_a: plant
     represented_as: node
     preferred_id: germplasmDbId
     input_label: germplasmName
+    properties:
+        germplasmDbId: string
+        germplasmPUI: string
+        germplasmName: string
+        accessionNumber: string
+        commonCropName: string
+        countryOfOriginCode: string
+        genus: string
+        species: string
+        subtaxa: string
+        #synonyms: string[]
+        pedigree: string
+        genusSpecies: string
+        instituteCode: string
+        instituteName: string
+        biologicalStatusOfAccessionCode: string
+        biologicalStatusOfAccessionDescription: string
+        presenceStatus: string
+        taxonCommonNames: string[]
+
 
 trial study list:
-    is_a: information content entity
+    is_a: entity
     represented_as: edge
     input_label: trial_studies
 
 study germplasm list:
-    is_a: information content entity
+    is_a: entity
     represented_as: edge
     input_label: studies_germplasm

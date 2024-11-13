@@ -6,9 +6,14 @@ biocypher:
   debug: false
   schema_config_path: config/schema_config.yaml
   cache_directory: .cache
+  head_ontology:
+    url: https://raw.githubusercontent.com/biolink/biolink-model/refs/heads/master/project/owl/biolink_model.owl.ttl
+    root_node: entity
 
 neo4j:
   delimiter: '\t'
   array_delimiter: "|"
   skip_duplicate_nodes: true
   skip_bad_relationships: true
+
+
