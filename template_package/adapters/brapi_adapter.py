@@ -85,15 +85,20 @@ class BrapiAdapter:
         logger.info("Generating nodes.")
 
         for trial in self.trial:
-            yield BioCypherNode (
-                node_id=trial["trialDbId"],
-                node_label="trial",
-                properties={
-                    "trialDbId": trial["trialDbId"],
-                    "trialName": trial["trialName"],
-                    "documentationURL": trial["documentationURL"]
-                }
-            )
+            yield (trial["trialDbId"], "trial", {
+                "trialDbId": trial["trialDbId"],
+                "trialName": trial["trialName"],
+                "documentationURL": trial["documentationURL"]
+            })
+            #yield BioCypherNode (
+            #    node_id=trial["trialDbId"],
+            #    node_label="trial",
+            #    properties={
+            #        "trialDbId": trial["trialDbId"],
+            #        "trialName": trial["trialName"],
+            #        "documentationURL": trial["documentationURL"]
+            #    }
+            #)
 
         for study in self.study:
             properties={
@@ -110,12 +115,12 @@ class BrapiAdapter:
                 "observationVariableDbIds": study["observationVariableDbIds"],
                 "seasons": study["seasons"]
             }
-            #yield (study["studyDbId"], "study", properties)
-            yield BioCypherNode (
-               node_id=study["studyDbId"],
-               node_label="study",
-               properties=properties,
-            )
+            yield (study["studyDbId"], "study", properties)
+            #yield BioCypherNode (
+            #   node_id=study["studyDbId"],
+            #   node_label="study",
+            #   properties=properties,
+            #)
 
         for germplasm in self.germplasm:
             properties={
@@ -138,32 +143,36 @@ class BrapiAdapter:
                 "commonCropName": germplasm["commonCropName"],
                 "taxonCommonNames": germplasm["taxonCommonNames"]
             }
-            yield BioCypherNode (
-                node_id=germplasm["germplasmDbId"],
-                node_label="germplasm",
-                properties=properties,
-            )
+            yield (germplasm["germplasmDbId"], "germplasm", properties)
+            #yield BioCypherNode (
+            #    node_id=germplasm["germplasmDbId"],
+            #    node_label="germplasm",
+            #    properties=properties,
+            #)
 
     def get_edges(self):
         logger.info("Generating edges.")
 
         for trial in self.trial:
             for study in trial["studies"]:
-                yield BioCypherEdge (
-                    source_id=trial["trialDbId"],
-                    target_id=study["studyDbId"],
-                    relationship_label="trial_studies",
-                    properties={}
-                )
+
+                yield (None, trial["trialDbId"],study["studyDbId"], "trial_studies", {})
+                #yield BioCypherEdge (
+                #    source_id=trial["trialDbId"],
+                #    target_id=study["studyDbId"],
+                #    relationship_label="trial_studies",
+                #    properties={}
+                #)
 
         for study in self.study:
             for germplasm in study["germplasmDbIds"]:
-                yield BioCypherEdge (
-                    source_id=study["studyDbId"],
-                    target_id=germplasm,
-                    relationship_label="studies_germplasm",
-                    properties={}
-                )
+                yield (None, study["studyDbId"], germplasm, "studies_germplasm", {})
+                #yield BioCypherEdge (
+                #    source_id=study["studyDbId"],
+                #    target_id=germplasm,
+                #    relationship_label="studies_germplasm",
+                #    properties={}
+                #)
 
     def get_node_count(self):
         """

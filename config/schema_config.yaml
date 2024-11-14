@@ -4,7 +4,7 @@ trial:
     is_a: dataset
     represented_as: node
     preferred_id: trialDbId
-    input_label: trialName
+    input_label: trial
     properties:
         trialName: string
         trialDbId: string
@@ -16,7 +16,7 @@ study:
     #is_a: dataset
     represented_as: node
     preferred_id: studyDbId
-    input_label: studyName
+    input_label: study
     properties:
         germplasmDbIds: string[]
         documentationURL: string
@@ -35,7 +35,7 @@ germplasm:
     is_a: plant
     represented_as: node
     preferred_id: germplasmDbId
-    input_label: germplasmName
+    input_label: germplasm
     properties:
         germplasmDbId: string
         germplasmPUI: string
@@ -61,8 +61,12 @@ trial study list:
     is_a: entity
     represented_as: edge
     input_label: trial_studies
+    source: trial
+    target: study
 
 study germplasm list:
     is_a: entity
     represented_as: edge
     input_label: studies_germplasm
+    source: study
+    target: germplasm
