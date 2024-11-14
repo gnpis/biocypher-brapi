@@ -115,6 +115,7 @@ class BrapiAdapter:
                 "observationVariableDbIds": study["observationVariableDbIds"],
                 "seasons": study["seasons"]
             }
+            # using tuples rather than BioCypherNode, as it is more efficient to get functionalities from BioChatter
             yield (study["studyDbId"], "study", properties)
             #yield BioCypherNode (
             #   node_id=study["studyDbId"],
