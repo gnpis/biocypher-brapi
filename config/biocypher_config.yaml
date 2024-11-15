@@ -7,19 +7,19 @@ biocypher:
   schema_config_path: config/schema_config.yaml
   cache_directory: .cache
   ## head ontology MIAPPE/PPEO configuration
-  head_ontology:
-    url: ./ontologies/miappebiocypher.owl.ttl
-    root_node: entity
-  tail_ontologies:
-    ppeo:
-      merge_nodes: false
-      url: https://raw.githubusercontent.com/MIAPPE/MIAPPE-ontology/refs/heads/master/PPEO.owl
-      head_join_node: biological concept
-      tail_join_node: study
-  # Head ontlogy BioLink configuration
 #  head_ontology:
-#    url: https://raw.githubusercontent.com/biolink/biolink-model/refs/heads/master/project/owl/biolink_model.owl.ttl
+#    url: ./ontologies/miappebiocypher.owl.ttl
 #    root_node: entity
+#  tail_ontologies:
+#    ppeo:
+#      merge_nodes: false
+#      url: https://raw.githubusercontent.com/MIAPPE/MIAPPE-ontology/refs/heads/master/PPEO.owl
+#      head_join_node: biological concept
+#      tail_join_node: study
+  # Head ontlogy BioLink configuration
+  head_ontology:
+    url: https://raw.githubusercontent.com/biolink/biolink-model/refs/heads/master/project/owl/biolink_model.owl.ttl
+    root_node: entity
 
 neo4j:
   delimiter: '\t'
