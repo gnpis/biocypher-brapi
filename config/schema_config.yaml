@@ -1,7 +1,7 @@
 # add your desired knowledge graph components here
 
 trial:
-    is_a: dataset
+    is_a: investigation
     represented_as: node
     preferred_id: trialDbId
     input_label: trial
@@ -32,7 +32,7 @@ study:
         endDate: string
 
 germplasm:
-    is_a: plant
+    is_a: biological material
     represented_as: node
     preferred_id: germplasmDbId
     input_label: germplasm

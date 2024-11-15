@@ -5,9 +5,20 @@ biocypher:
   debug: false
   schema_config_path: config/schema_config.yaml
   output_directory: data/build2neo
+  ## head ontology MIAPPE/PPEO configuration
   head_ontology:
-    url: https://raw.githubusercontent.com/biolink/biolink-model/refs/heads/master/project/owl/biolink_model.owl.ttl
+    url: ./ontologies/miappebiocypher.owl.ttl
     root_node: entity
+  tail_ontologies:
+    ppeo:
+      #merge_nodes: false
+      url: https://raw.githubusercontent.com/MIAPPE/MIAPPE-ontology/refs/heads/master/PPEO.owl
+      head_join_node: biological concept
+      tail_join_node: biological concept
+  # Head ontlogy BioLink configuration
+#  head_ontology:
+#    url: https://raw.githubusercontent.com/biolink/biolink-model/refs/heads/master/project/owl/biolink_model.owl.ttl
+#    root_node: entity
 
 neo4j:
   database_name: neo4j
