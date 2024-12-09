@@ -156,7 +156,7 @@ class BrapiAdapter:
 
         for trial in self.trial:
             for study in trial["studies"]:
-
+                # important to use tuple instead of BioCypherEdge, as it is more efficient to get functionalities from BioChatter
                 yield (None, trial["trialDbId"],study["studyDbId"], "trial_studies", {})
                 #yield BioCypherEdge (
                 #    source_id=trial["trialDbId"],
